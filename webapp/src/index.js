@@ -1,17 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+
+const name = 'Mauro'
+const last_name = 'Hernandez'
+const sesion = true
+const alumnos = ["Andrea", "Mauro", "Rafa"]
+
+const jsx = (
+  <> 
+    {sesion === true? (
+    <>
+    <h1 style={{color:'green', textAlign: "center"}}> Hola {name}</h1>
+    <h2 style={{color:'green', textAlign: "center"}}> Tu apellido es {last_name}</h2>
+    <h3 style={{textAlign: "center"}}> Lista de alumnos </h3>
+    <ul style={{textAlign: "center"}}>
+      {alumnos.map((name, i) => {
+        return <li key={i} style={{textAlign: "center"}}>{name}</li>
+      } )}
+      
+    </ul>
+    </>) 
+    :
+     (
+     <h2 style={{color:'red', textAlign: "center"}}> No has iniciado sesion</h2>
+     )}
+ </>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+root.render(jsx);
+/* const compruebaSesion = (sesion) => {
+  if(sesion === true){
+    return jsx
+  }
+  else{
+    return <h2 style={{color:'red', textAlign: "center"}}> No has iniciado sesion</h2>
+  }
+}
+
+root.render(compruebaSesion(sesion)) */
