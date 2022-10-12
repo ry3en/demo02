@@ -1,42 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+import Alumno from "./componentes/Usuario";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const name = 'Mauro'
-const last_name = 'Hernandez'
-const sesion = true
-const alumnos = ["Andrea", "Mauro", "Rafa"]
+const App = () => {
+  const [sesion, cambiarSesion] = useState(true);
+  const [contador, setContador] = useState(0);
 
-const jsx = (
-  <> 
-    {sesion === true? (
+  return (
     <>
-    <h1 style={{color:'green', textAlign: "center"}}> Hola {name}</h1>
-    <h2 style={{color:'green', textAlign: "center"}}> Tu apellido es {last_name}</h2>
-    <h3 style={{textAlign: "center"}}> Lista de alumnos </h3>
-    <ul style={{textAlign: "center"}}>
-      {alumnos.map((name, i) => {
-        return <li key={i} style={{textAlign: "center"}}>{name}</li>
-      } )}
-      
-    </ul>
-    </>) 
-    :
-     (
-     <h2 style={{color:'red', textAlign: "center"}}> No has iniciado sesion</h2>
-     )}
- </>
-);
+      {sesion === true ? (
+        <>
+          <h1>contador {contador}</h1>
+          <Alumno />
+          <button onClick={() => cambiarSesion(false)}>Cerrar sesion</button>
+          <button onClick={() => setContador(contador+1)}>Sumar</button>
+          <button onClick={() => setContador(contador-1)}>restar</button>
+          <button onClick={() => setContador(contador*2)}>Mul 2</button>
+        </>
+      ) : (
+        <>
+          <h2>No has iniciado sesión</h2>
+          <button onClick={() => cambiarSesion(true)}>Iniciar sesion</button>
+        </>
+      )}
+    </>
+  );
+};
 
-root.render(jsx);
-/* const compruebaSesion = (sesion) => {
-  if(sesion === true){
-    return jsx
-  }
-  else{
-    return <h2 style={{color:'red', textAlign: "center"}}> No has iniciado sesion</h2>
-  }
-}
-
-root.render(compruebaSesion(sesion)) */
+root.render(<App />);
